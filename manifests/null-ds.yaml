@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: null-cni
+  namespace: kube-system
+  labels:
+    k8s-app: null-cni
+spec:
+  selector:
+    matchLabels:
+      name: null-cni
+  template:
+    metadata:
+      labels:
+        name: null-cni
+    spec:
+      nodeSelector:
+        beta.kubernetes.io/arch: amd64
+      tolerations:
+      - key: node-role.kubernetes.io/master
+        effect: NoSchedule
+      initContainers:
+      - name: install-cni
+        image: kaloom/null:0.1.0
+        command:
+        - sh
+        args: [ "-ec", "cp /null /host/opt/cni/bin" ]
+        volumeMounts:
+        - name: hostcnibin
+          mountPath: /host/opt/cni/bin
+      containers:
+      - name: null-cni
+        image: kaloom/null:0.1.0
+        args: ["/bin/bash", "-c", "echo 'null cni-plugin got installed'; sleep infinity" ]
+      volumes:
+      - name: hostcnibin
+        hostPath:
+          path: /opt/cni/bin
+          type: DirectoryOrCreate

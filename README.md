@@ -72,4 +72,4 @@ Currently, to deploy kactus as DaemonSet
 
 # Example
 
-see [kactus cni-plugin Example](https://github.com/kaloom/kubernetes-kactus-cni-plugin)
+see [kactus cni-plugin Example](https://github.com/kaloom/kubernetes-kactus-cni-plugin#example)

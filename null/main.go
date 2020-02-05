@@ -151,9 +151,12 @@ func cmdDel(args *skel.CmdArgs) error {
 }
 
 func main() {
-	// will get a file object if CNI_LOGGING_LEVEL environment variable is
+	logParams := kc.LoggingParams{
+		Prefix: "NULL ",
+	}
+	// will get a file object if _CNI_LOGGING_LEVEL environment variable is
 	// set to a value >= 1, otherwise no logging goes to /dev/null
-	lf := kc.OpenLogFile(nil)
+	lf := kc.OpenLogFile(&logParams)
 	defer kc.CloseLogFile(lf)
 
 	// TODO: implement plugin version

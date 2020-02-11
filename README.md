@@ -24,28 +24,9 @@ it's meant to be used in use cases where the ipv4/ipv6 address configuration of 
 
 ## For developpers:
 
-if you're adding a new dependency package to the project you need to use `gradle`, otherwise running the `./build.sh` script should do
+This project uses Go modules as dependency management system. Even if modules support was added in 1.11, the minimum Go version required by this project is 1.13.
 
-`gradle` required `java` to be installed, its used to generate the dependencies (using `gogradle` plugin), update the `gogradle.lock`, build the project and update the go `vendor` directory if needed
-
-* update build.gradle
-* generate a new `gogradle.lock` file:
-  > `./gradlew lock`
-* build the project (the `build` gradle task would trigger an update to the `vendor` directory using the `gogradle.lock` if needed):
-  > `./gradlew build`
-
-  or simply
-
-  > `./gradlew`
-* submit a merge request
-
-
-### other useful info:
-
-* updating only the vendor directory can be done with:
-  > `./gradlew vendor`
-* to get a list of available `gradle` tasks:
-  > `./gradlew tasks`
+If you're adding a new dependency package to the project you need to update go.mod and go.sum files. Refer to this Go [blog post](https://blog.golang.org/using-go-modules) or this [wiki article](https://github.com/golang/go/wiki/Modules) if you need information on how to work with go modules.
 
 # Setup
 
